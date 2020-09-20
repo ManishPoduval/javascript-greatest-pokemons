@@ -30,7 +30,7 @@ const shortestPokemon = (array) => {
             return 0
         }
     })
-
+    console.log(findShortestPoke)
     return findShortestPoke[0].name
 }
 
@@ -64,11 +64,13 @@ const getGroundPokeImg = (array) => {
 
     const pokeImage = array
     .filter((pokemon) => {
-        if (pokemon.type.includes("Ground")) {
-            return pokemon.img
-        }
+        return (pokemon.type.includes("Ground")) 
     })
-    .slice(0, 9)
+    .map((pokemon) => {
+        return pokemon.img
+    })
+
+    .slice(0, 10)
     //console.log(pokeImage)
     return pokeImage
 }
@@ -81,18 +83,37 @@ const getHeavyPokemons = (array) => {
         return 0
     }
     const newPokeArr = JSON.parse(JSON.stringify(array));
-
-    // const pikaWeight = 
-    // // const convertStringtoNum = (weigthString) => {
-    // //     let convertWeight = weightString.split('kg'); 
-    // //     return Number(convertWeight[0])
-    // //   }
-
-    // //   let pokeWeight = newPokeArr.weight
-
     
+    const findHeavyPoke = newPokeArr
     
-    // return newPokeArr
+    // You’ll need to filter the pokemons, find pikachu and store the weight in a variable rather than hardcoding it.
+    // Once you find pikachu’s weight, loop over the array again and filter based on the ones heavier than pikachu
+    let pikaWeight = "";
+    const findPika = findHeavyPoke.filter((pokemon) => {
+        if (pokemon.name === "Pikachu")
+        //console.log(Number(pokemon.height.split(" ")[0]))
+        pikaWeight = Number(pokemon.weight.split(" ")[0])
+    })
+
+    console.log(pikaWeight)
+
+    const otherPokeWeight = findHeavyPoke
+    
+    .filter((poke) => {
+        let allOtherPokeWeight = Number(poke.weight.split(" ")[0]);
+        //console.log(allOtherPokeWeight)
+        return allOtherPokeWeight > pikaWeight
+    })
+    //console.log(otherPokeWeight)
+
+    .map((poke) => {
+        return poke.name
+    })
+
+  
+
+    console.log(otherPokeWeight.toString())
+    return otherPokeWeight
 }
 
 
@@ -103,17 +124,21 @@ const orderAlphabetically = (array) => {
     const newAlphaPokeArr = JSON.parse(JSON.stringify(array));
 
     const sortedArray = newAlphaPokeArr
-    .sort((a, b) => {
-        if (a.name > b.name) {
+    
+    .sort((pokeA, pokeB) => {
+        if (pokeA.name > pokeB.name) {
             return 1 
-        } else {
+        } else if (pokeA.name < pokeB.name) {
             return -1
+        } else {
+            return 0
         }
     })
-    
-    .map(pokeName => pokeName.name)
-    .slice(0, 19);
 
+    .map(pokeName => pokeName.name)
+    .slice(0, 20);
+
+    console.log(sortedArray);
     return sortedArray
 }
 
@@ -124,10 +149,18 @@ const orderAlphabetically = (array) => {
 
 const strongPokemons = (array) => {
 
-    const strongPoke = array.filter((poke) => {
-        if (poke.weaknesses.length <= 1) {
-            return poke.name;
-        }  
+    const strongPoke = array
+    
+    .filter((poke) => {
+        return poke.weaknesses.length <= 1
     })
+
+    .map((poke) => {
+        return poke.name
+    })
+
+    .slice(0, 15)
+
+    console.log(strongPoke)
     return strongPoke;
 }
