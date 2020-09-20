@@ -39,7 +39,29 @@ const getGroundPokeImg = (pokedex) => {
 };
 
 /*  Iteration 5: Find all pokemon names heavier than Pikachu.  */
-const getHeavyPokemons = (pokedex) => {};
+const getHeavyPokemons = (pokedex) => {
+  const pikaWeight = pokedex
+    .filter((pokemon) => {
+      return pokemon.name === "Pikachu";
+    })
+    .map((pokemon) => {
+      return Number(pokemon.weight.split(" ")[0]);
+    });
+
+  const fixWeights = pokedex;
+  fixWeights.forEach((pokemon) => {
+    pokemon.weight = pokemon.weight.split(" ");
+    pokemon.weight = Number(pokemon.weight[0]);
+  });
+
+  const fatterThanPika = fixWeights
+    .filter((pokemon) => {
+      return pokemon.weight > pikaWeight;
+    })
+    .map((pokemon) => pokemon.name);
+  
+  return fatterThanPika;
+};
 
 /*  Iteration 6: Order by name and print the first 20 names.  */
 const orderAlphabetically = (pokedex) => {
