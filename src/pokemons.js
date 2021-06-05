@@ -1,7 +1,10 @@
 
 // Iteration 1: All Fire Pokemons- get the array of all Fire type pokemons
 function getAllFirePokemons(pokemons) {
-   return pokemons.filter((pokemon) => pokemon.type.includes("Fire"))
+
+   return pokemons.filter((pokemon) => {
+       return pokemon.type.includes("Fire")
+   })
 }
     
 // Iteration 2: Shortest Pokemon- find the `name` of the shortest pokemon
@@ -38,34 +41,55 @@ function candyAverage(pokemons) {
 // Iteration 4: images for the first 10 `Ground`  Pokemons
 function getGroundPokeImg(pokemons) {
     if (!pokemons.length) {return 0};
-    groundPokemons = pokemons.filter((pokemon) => pokemon.type.includes("Ground"))
-    return (groundPokemons.map((pokemon) => pokemon.img)).slice(0,10)
-     
+    groundPokemons = pokemons.filter((pokemon) => {
+        return pokemon.type.includes("Ground")
+    })
+    let groundImg = groundPokemons.map((pokemon) => {
+        return pokemon.img
+    })
+    return groundImg.slice(0,10)
 }
 
 // Iteration 5: Find all pokemon names heavier than Pikachu
 function getHeavyPokemons(pokemons) {
-    if (!pokemons.length) {return 0};
-    
-  let pikachu = []
-  pikachu = pokemons.filter((pokemon) => {
-      return pokemon.name == "Pikachu"
-    })
+    if (!pokemons.length) { return 0 };
   
-  let heavyPokemons = [];
-  heavyPokemons = pokemons.filter((pokemon) => {
-    if (pokemon.weight > pikachu.weight) {
-      return pokemon
+    let pkWt = '';
+    pokemons.filter((pokemon) => {
+        if (pokemon.name === "Pikachu") {
+        pkWt = +pokemon.weight.slice(0,-2)
         }
     })
-    let big10 = []
-     big10 = heavyPokemons.map((pokemon) => {
-         return pokemon.name
-     })
-   return big10
+
+    let heavyPokemons = [];
+    pokemons.filter((pokemon) => {
+        if (+(pokemon.weight.slice(0,-2)) > pkWt) {
+        heavyPokemons.push(pokemon.name)
+        }
+    });
+    return heavyPokemons
 }
 
 // Iteration 6: Alphabetic Order - Order by name and print the first 20 names
-function orderAlphabetically(pokemons) {}
+function orderAlphabetically(pokemons) {
+    const pokeClone = JSON.parse(JSON.stringify(pokemons));
+
+    const sortedArray = pokeClone.sort((a,b) => {
+        if (a.name < b.name) {return -1}
+        else if (a.name > b.name) {return +1}
+        else {return 0};
+})
+    return sortedArray.map( pokemon => pokemon.name ).slice(0,20);
+    }
 // Iteration 7: Strong pokemons - return an array of first 15 pokemons, that have just one `weakness`. If there are less that 15, return all of them 
-function strongPokemons(pokemons) {}
+function strongPokemons(pokemons) {
+
+    const strongPokemons = pokemons.filter((pokemon) => {
+        return pokemon.weaknesses.length === 1
+    })
+    
+    let strongNames = strongPokemons.map( pokemon => {
+        return pokemon.name
+    })
+    return strongNames.slice(0,15);
+}
