@@ -7,6 +7,7 @@ function shortestPokemon(arr){
     if (arr.length === 0) {
         return 0; 
       }
+      //i didn't use map here 
 let short = arr[0];
 for(let i = 0 ; i < arr.length ; i++){
 if(arr[i].name.length > short.name.length){
@@ -32,10 +33,37 @@ function getGroundPokeImg(arr) {
     return realFiltered;
 }
 // Iteration 5: Find all pokemon names heavier than Pikachu
+function getHeavyPokemons(arr) {
+    
+    const pikachu = arr.find(pokemon => pokemon.name === "Pikachu");
+    if (!pikachu) {
+        console.log("Pikachu not found in the array.");
+        return 0;
+    }
 
+    // Filtering the array to get the names of Pokémon heavier than Pika
+    const heavyPokemons = arr.filter(pokemon => parseFloat(pokemon.weight) > parseFloat(pikachu.weight));
+    const heavyPokemonNames = heavyPokemons.map(pokemon => pokemon.name);
+    return heavyPokemonNames;
+}
 
 
 
 // Iteration 6: Alphabetic Order - Order by name and print the first 20 names
+function orderAlphabetically(arr){
+    const clonedArray = [...arr];
+    const sortedArray = clonedArray.sort((a, b) => a.name.localeCompare(b.name));
+    const top20 = sortedArray.slice(0, 20);
+    const top20Names = top20.map(pokemon => pokemon.name);
+    return top20Names;
+}
+
+
+
 
 // Iteration 7: Strong pokemons - return an array of first 15 pokemons, that have just one `weakness`. If there are less that 15, return all of them 
+function strongPokemons(arr) {
+    const singleWeaknessPokemons = arr.filter(pokemon => pokemon.weaknesses.length === 1);
+    const top15Names = singleWeaknessPokemons.slice(0, 15).map(pokemon => pokemon.name);
+    return top15Names;
+}
