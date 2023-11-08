@@ -102,6 +102,49 @@ function candyAverage(pokemonArray) {
 
 // Iteration 4: images for the first 10 `Ground`  Pokemons
 
+/*
+Create a function getGroundPokeImg() which accepts an array of pokemons as a parameter and returns an array of images for the first 10 Ground type pokemons.
+
+Note: Ground type pokemons have this property in the object
+
+
+"type": [
+
+"Ground",
+
+],
+
+*/
+
+// Create the function getGroundPokeImg()
+function getGroundPokeImg(pokemonArray) {
+    
+    // Check if the array is empty. If yes return zero.
+    if(pokemonArray.length === 0) {
+        return 0;
+    }
+
+    // Array that will hold the image values
+    const groudnPkmImg = [];
+
+    // For Loop to go throught array up to 10
+    for(let i = 0; i < pokemonArray.length && groudnPkmImg.length < 10; i++) {
+
+        // Get Pokemon
+        const currentPokemon = pokemonArray[i];
+
+        // Check if it is Groind and if yes save it.
+        if(currentPokemon.type.includes("Ground")) {
+            
+            // Add the image to the array
+            groudnPkmImg.push(currentPokemon.img);
+        }
+    }
+
+    // Returnning the Array of the first 10 Pokemons
+    return groudnPkmImg;
+}
+
 // Iteration 5: Find all pokemon names heavier than Pikachu
 
 // Iteration 6: Alphabetic Order - Order by name and print the first 20 names
