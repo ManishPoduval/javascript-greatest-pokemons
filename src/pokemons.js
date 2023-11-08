@@ -233,4 +233,23 @@ function orderAlphabetically(pokemonArray) {
 
 // Iteration 7: Strong pokemons - return an array of first 15 pokemons, that have just one `weakness`. If there are less that 15, return all of them 
 
+/*
+
+Create a strongPokemons() function, that receives an array and returns an array of first 15 pokemon names, that have just one weakness
+
+*/
+
+// Create the function
+function strongPokemons(pokemonArray) {
+
+    // Filter the pokemons with just one weakness
+    const strongOnes = pokemonArray.filter(pokemon => pokemon.weaknesses.length === 1);
+    
+    // Extract the name of the first 15 Pokemons
+    first15Pokemons = strongOnes.slice(0, 15).map(pokemon => pokemon.name);
+
+    // Return the new array with names
+    return first15Pokemons;
+}
+
 // console.log("\n");
