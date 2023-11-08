@@ -145,7 +145,53 @@ function getGroundPokeImg(pokemonArray) {
     return groudnPkmImg;
 }
 
-// Iteration 5: Find all pokemon names heavier than Pikachu
+// Iteration 5: Find all pokemon names heavier than Pikachu.
+
+/* 
+
+We might need to use more than a single loop here
+
+Create a function getHeavyPokemons() that receives an array as parameter and returns a new filtered array with the names of all Pokemons heavier than Pikachu.
+
+Note: All pokemons have a weight attribute. You moght need to use that
+
+💡 Make sure not to mutate the original array 😉
+
+*/
+
+function getHeavyPokemons(pokemonArray) {
+    
+    // Check that there's no empty array
+    if(pokemonArray.length === 0) {
+        return 0;
+    }
+
+    // Getting Pikachu Object
+    const pikachu = pokemonArray.find(p => p.name === "Pikachu");
+
+    // Convert Weigth to number
+    const pikachuWeight = parseFloat(pikachu.weight);
+
+    // Create the array of heavier than Pikachu Pokemons
+    const heavyPokemons = [];
+
+    // Looping through the array
+    pokemonArray.forEach(pokemon => {
+
+        // Convert Pokemon's weight to Float
+        const pokemonWeigth = parseFloat(pokemon.weight);
+
+        // Compare Pikachu's weight
+        if(pikachuWeight < pokemonWeigth) {
+
+            // Add to the Array
+            heavyPokemons.push(pokemon.name);
+        }
+    });
+
+    // Return the array of names
+    return heavyPokemons;
+}
 
 // Iteration 6: Alphabetic Order - Order by name and print the first 20 names
 
