@@ -195,6 +195,42 @@ function getHeavyPokemons(pokemonArray) {
 
 // Iteration 6: Alphabetic Order - Order by name and print the first 20 names
 
+/*
+
+Create a orderAlphabetically() function, that receives an array and returns an array of first 20 pokemons, alphabetically ordered based on their name. Return only the name of each pokemon, and if the array you receive has less than 20 pokemons, return all of them.
+
+Make sure not to mutate the original array
+
+*/
+
+// Create the function
+function orderAlphabetically(pokemonArray) {
+    
+    // check if the array is not emptu
+    // if(pokemonArray.length === 0) {
+    //     return 0;
+    // }
+    
+    // Create the new Array to avoid 
+    const orderedPokemon = [... pokemonArray];
+
+    // Sort Alphabetical the names in ascending order
+    orderedPokemon.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+    });
+
+    // Create the array which will hold the first 20 names
+    const first20Pokemons = [];
+
+    // For Loop to get the fist 20 Pokemons
+    for(let i = 0; i < pokemonArray.length && i < 20; i++){
+        first20Pokemons.push(orderedPokemon[i].name);
+    }
+
+    // Return the ordered array with the first 20 Pokemons
+    return first20Pokemons;
+}
+
 // Iteration 7: Strong pokemons - return an array of first 15 pokemons, that have just one `weakness`. If there are less that 15, return all of them 
 
 // console.log("\n");
