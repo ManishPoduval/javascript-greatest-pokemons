@@ -1,6 +1,23 @@
+// const pokemons = require("./data");
+
 // Iteration 1: All Fire Pokemons- get the array of all Fire type pokemons
+function getAllFirePokemons(pokemons){
+    return pokemons.filter(pokemon => pokemon.type[0] === 'Fire');
+}
 
 // Iteration 2: Shortest Pokemon- find the `name` of the shortest pokemon
+function shortestPokemon(pokemons){
+  const pokemonHeights = pokemons.map(pokemon => pokemon.height.split(' ').shift());
+
+  const leastHeight = `${pokemonHeights.sort((a, b) => a - b)[0]} m`;
+
+  const shortPokemon = pokemons.filter(pokemon => pokemon.height === leastHeight);
+  return  shortPokemon.length === 0 ? 0 : shortPokemon[0].name;
+    
+}
+
+
+
 
 // Iteration 3: candy_count average - average of `candy_count` for all the pokemons
 
