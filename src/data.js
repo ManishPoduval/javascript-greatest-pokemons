@@ -1,3 +1,5 @@
+
+
 let pokemons = [
     {
       "id": 1,
@@ -4618,3 +4620,5 @@ let pokemons = [
       ]
     }
   ]
+
+  module.exports = pokemons;
