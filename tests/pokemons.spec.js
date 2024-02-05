@@ -177,9 +177,9 @@ describe('Find all pokemon names heavier than Pikachu - getHeavyPokemons', () =>
 
 });
 
-/*
- * 6. orderAlphabetically
- */
+// /*
+//  * 6. orderAlphabetically
+//  */
 
 describe('Order alphabetically - orderAlphabetically', () => {
   it('Defines orderAlphabetically', () => {
