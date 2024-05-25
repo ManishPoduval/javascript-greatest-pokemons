@@ -23,6 +23,9 @@ describe(' All Fire Pokemons - getAllFirePokemons', () => {
 
 
 });
+function getAllFirePokemons(pokemons) {
+    return pokemons.filter(pokemon => pokemon.type.includes("Fire"));
+}
 
 /*
  * 2. shortestPokemon
@@ -84,6 +87,14 @@ describe('the Shortest Pokemon- shortestPokemon', () => {
     expect(shortestPokemon(pokemons)).toBe('Diglett');
   });
 });
+function shortestPokemon(pokemons) {
+    return pokemons.reduce((shortest, current) => {
+        const currentHeight = parseFloat(current.height);
+        const shortestHeight = parseFloat(shortest.height);
+        return currentHeight < shortestHeight ? current : shortest;
+    }).name;
+}
+
 
 /*
  * 3. candyAverage
@@ -113,6 +124,13 @@ describe('All `candy_count` average - candyAverage', () => {
     expect(candyAverage([{ candy_count: 6 }, { candy_count: '' }, {}])).toBe(2);
   });
 });
+function candyAverage(pokemons) {
+    const pokemonsWithCandy = pokemons.filter(pokemon => pokemon.candy_count !== undefined);
+    const totalCandy = pokemonsWithCandy.reduce((total, pokemon) => total + pokemon.candy_count, 0);
+    const average = totalCandy / pokemonsWithCandy.length;
+    return average.toFixed(2);
+}
+
 
 /*
  * 4. getGroundPokeImg
@@ -141,6 +159,12 @@ describe(' first 10 `Ground`  Pokemons - getGroundPokeImg', () => {
   });
 
 });
+function getGroundPokeImg(pokemons) {
+    return pokemons.filter(pokemon => pokemon.type.includes("Ground"))
+                   .slice(0, 10)
+                   .map(pokemon => pokemon.img);
+}
+
 
 /*
  * 5. getHeavyPokemons
@@ -176,6 +200,13 @@ describe('Find all pokemon names heavier than Pikachu - getHeavyPokemons', () =>
   });
 
 });
+function getHeavyPokemons(pokemons) {
+    const pikachu = pokemons.find(pokemon => pokemon.name === "Pikachu");
+    const pikachuWeight = parseFloat(pikachu.weight);
+    return pokemons.filter(pokemon => parseFloat(pokemon.weight) > pikachuWeight)
+                   .map(pokemon => pokemon.name);
+}
+
 
 /*
  * 6. orderAlphabetically
@@ -331,6 +362,12 @@ describe('Order alphabetically - orderAlphabetically', () => {
     ]);
   });
 });
+function orderAlphabetically(pokemons) {
+    return pokemons.map(pokemon => pokemon.name)
+                   .sort()
+                   .slice(0, 20);
+}
+
 
 /*
  * 7. strongPokemons
@@ -358,3 +395,9 @@ describe('Strong pokemons - strongPokemons', () => {
     expect(strongPokemons(pokemons).length).toBe(15);
   });
 });
+function strongPokemons(pokemons) {
+    return pokemons.filter(pokemon => pokemon.weaknesses.length === 1)
+                   .map(pokemon => pokemon.name)
+                   .slice(0, 15);
+}
+
