@@ -1,13 +1,62 @@
-// Iteration 1: All Fire Pokemons- get the array of all Fire type pokemons
+// Iteration 1: Get all Fire-type Pokemons
+function getAllFirePokemons(pokemons) {
+  return pokemons.filter((pokemon) => pokemon.type.includes("Fire"));
+}
 
-// Iteration 2: Shortest Pokemon- find the `name` of the shortest pokemon
+// Iteration 2: Find the Shortest Pokemon
+function shortestPokemon(pokemons) {
+  return pokemons.reduce((shortest, current) => {
+    return parseFloat(current.height) < parseFloat(shortest.height)
+      ? current
+      : shortest;
+  }).name;
+}
 
-// Iteration 3: candy_count average - average of `candy_count` for all the pokemons
+// Iteration 3: Calculate the average candy_count
+function candyAverage(pokemons) {
+  let totalCandy = 0;
+  let count = 0;
 
-// Iteration 4: images for the first 10 `Ground`  Pokemons
+  pokemons.forEach((pokemon) => {
+    if (pokemon.candy_count) {
+      totalCandy += pokemon.candy_count;
+      count++;
+    }
+  });
 
-// Iteration 5: Find all pokemon names heavier than Pikachu
+  return count === 0 ? 0 : parseFloat((totalCandy / count).toFixed(2));
+}
 
-// Iteration 6: Alphabetic Order - Order by name and print the first 20 names
+// Iteration 4: Get images of first 10 Ground-type Pokemons
+function getGroundPokeImg(pokemons) {
+  return pokemons
+    .filter((pokemon) => pokemon.type.includes("Ground"))
+    .slice(0, 10)
+    .map((pokemon) => pokemon.img);
+}
 
-// Iteration 7: Strong pokemons - return an array of first 15 pokemons, that have just one `weakness`. If there are less that 15, return all of them 
+// Iteration 5: Find all Pokemon names heavier than Pikachu
+function getHeavyPokemons(pokemons) {
+  const pikachu = pokemons.find((pokemon) => pokemon.name === "Pikachu");
+  const pikachuWeight = parseFloat(pikachu.weight);
+
+  return pokemons
+    .filter((pokemon) => parseFloat(pokemon.weight) > pikachuWeight)
+    .map((pokemon) => pokemon.name);
+}
+
+// Iteration 6: Alphabetical Order (first 20 names)
+function orderAlphabetically(pokemons) {
+  return pokemons
+    .map((pokemon) => pokemon.name)
+    .sort()
+    .slice(0, 20);
+}
+
+// Iteration 7: Strong Pokemons (first 15 with only one weakness)
+function strongPokemons(pokemons) {
+  return pokemons
+    .filter((pokemon) => pokemon.weaknesses.length === 1)
+    .slice(0, 15)
+    .map((pokemon) => pokemon.name);
+}
